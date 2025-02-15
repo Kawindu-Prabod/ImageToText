@@ -41,5 +41,5 @@ dependencies {
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
     implementation("com.github.dhaval2404:imagepicker:2.1")
-
+    implementation("com.google.android.gms:play-services-mlkit-text-recognition:19.0.1")
 }

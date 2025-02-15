@@ -1,6 +1,8 @@
 package com.mad.imagetotext;
 
 import android.app.Activity;
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -59,6 +61,37 @@ public class MainActivity extends AppCompatActivity {
                         .compress(1024)
                         .maxResultSize(1080,1080)
                         .start();
+            }
+        });
+
+        copy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String text = recogText.getText().toString();
+                if(text.isEmpty()){
+                    Toast.makeText(MainActivity.this, "There is no text to copy", Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    ClipboardManager clipboardManager = (ClipboardManager) getSystemService(MainActivity.this.CLIPBOARD_SERVICE);
+                    ClipData clipData = ClipData.newPlainText("Data",recogText.getText().toString());
+                    clipboardManager.setPrimaryClip(clipData);
+
+                    Toast.makeText(MainActivity.this, "Text Copied to Clipboard", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        clear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String text = recogText.getText().toString();
+
+                if (text.isEmpty()){
+                    Toast.makeText(MainActivity.this, "Empty!", Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    recogText.setText("");
+                }
             }
         });
     }
